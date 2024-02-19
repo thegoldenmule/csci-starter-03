@@ -30,7 +30,18 @@ window.init = async (canvas) => {
     //
   });
 
-  const cube = create(gl, {
+  const plane = create(gl, {
+    program: programs.default,
+    ...geo.quad(),
+    rotation: quat.fromEuler(quat.create(), 90, 0, 0),
+    scale: vec3.fromValues(1, 1, 1),
+    attributes: [
+      { key: 'diffuse', name: 'aTextureCoord' },
+    ],
+  });
+  scene.push(plane);
+
+  /*const cube = create(gl, {
     program: programs.default,
     ...geo.cube(),
     rotation: quat.fromEuler(quat.create(), 45, 45, 0),
@@ -38,16 +49,23 @@ window.init = async (canvas) => {
     attributes: [
       { key: 'diffuse', name: 'aTextureCoord' },
     ],
+    update: (dt) => {
+      const speed = 0.0001;
+      const { rotation, } = cube;
+      quat.rotateX(rotation, rotation, dt * speed);
+      quat.rotateY(rotation, rotation, dt * speed * speed);
+    },
   });
-  scene.push(cube);
+  scene.push(cube);*/
 
   loadTexture(gl,
     {
-      path: 'assets/block.png',
+      path: 'assets/texture.png',
       callback: (texture) => {
         console.log('Loaded!');
 
-        cube.textures.diffuse = texture;
+        //cube.textures.diffuse = texture;
+        plane.textures.diffuse = texture;
       },
     });
 };

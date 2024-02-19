@@ -5,6 +5,7 @@ export const create = (gl, {
   position = vec3.create(),
   scale = vec3.fromValues(1, 1, 1),
   rotation = quat.create(),
+  update,
   indices, vertices, uvs, colors,
 }) => {
   const M = mat4.create();
@@ -56,7 +57,7 @@ export const create = (gl, {
 
   const { draw = [] } = plugins;
   const node = {
-    name, program, position, rotation, scale, textures,
+    name, program, position, rotation, scale, textures, update,
     transform: M,
     children: [],
     draw: (params) => {
