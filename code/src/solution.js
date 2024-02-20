@@ -39,11 +39,11 @@ window.init = async (canvas) => {
       { key: 'diffuse', name: 'aTextureCoord' },
     ],
   });
-  scene.push(plane);
+  //scene.push(plane);
 
-  /*const cube = create(gl, {
+  const cube = create(gl, {
     program: programs.default,
-    ...geo.cube(),
+    ...geo.cubeComplex(),
     rotation: quat.fromEuler(quat.create(), 45, 45, 0),
     scale: vec3.fromValues(0.5, 0.5, 0.5),
     attributes: [
@@ -56,7 +56,7 @@ window.init = async (canvas) => {
       quat.rotateY(rotation, rotation, dt * speed * speed);
     },
   });
-  scene.push(cube);*/
+  scene.push(cube);
 
   const texture = await loadTextureAsync(gl,
   {
@@ -64,7 +64,7 @@ window.init = async (canvas) => {
   });
   console.log('Loaded!');
 
-  //cube.textures.diffuse = texture;
+  cube.textures.diffuse = texture;
   plane.textures.diffuse = texture;
 };
 
