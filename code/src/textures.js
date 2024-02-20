@@ -15,3 +15,9 @@ export const loadTexture = (gl, { path, callback, }) => {
   image.src = path;
 };
 
+export const loadTextureAsync = (gl, { path }) => new Promise((res, _) => {
+  loadTexture(gl, {
+    path,
+    callback: res,
+  });
+});

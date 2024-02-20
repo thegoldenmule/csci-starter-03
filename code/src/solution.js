@@ -2,7 +2,7 @@
 import geo from "./geo.js";
 import { create } from "./node.js";
 import { loadShader } from "./shaders.js";
-import { loadTexture } from "./textures.js";
+import { loadTexture, loadTextureAsync } from "./textures.js";
 
 /** @type {WebGLRenderingContext} */
 let gl;
@@ -58,16 +58,14 @@ window.init = async (canvas) => {
   });
   scene.push(cube);*/
 
-  loadTexture(gl,
-    {
-      path: 'assets/texture.png',
-      callback: (texture) => {
-        console.log('Loaded!');
+  const texture = await loadTextureAsync(gl,
+  {
+    path: 'assets/texture.png',
+  });
+  console.log('Loaded!');
 
-        //cube.textures.diffuse = texture;
-        plane.textures.diffuse = texture;
-      },
-    });
+  //cube.textures.diffuse = texture;
+  plane.textures.diffuse = texture;
 };
 
 window.loop = (dt, canvas) => {
